@@ -1,0 +1,173 @@
+<!doctype html>
+{% load static %}
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" >
+  <link rel="stylesheet" href="{% static 'css/output.css' %}">
+  <link rel="stylesheet" href="{% static 'css/box.css' %}">
+  <link rel="stylesheet" href="{% static 'css/about.css' %}">
+
+  <!--tailwind CSS For Tail Blocks-->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+ 
+
+
+  
+  
+ 
+
+  {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> {% endcomment %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Techno Fitness</title>
+  <link rel="icon" type="image/x-icon" href="{% static "images/logo.jpeg" %}">
+ 
+<body>
+
+<!--Navbar Section-->
+  <header class="text-gray-600 body-font nav mb-3">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+
+      {% if user.is_superuser %}
+      <a href="#" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <img src="{% static 'images/logo.jpeg' %}" alt="logo" id="logo" >
+        <span class="ml-3 text-xl nav-heading">TECHNO FITNESS</span>
+      </a>
+      {% else %}
+      <a href="{% url "homepage" %}" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <img src="{% static 'images/logo.jpeg' %}" alt="logo" id="logo" >
+        <span class="ml-3 text-xl nav-heading">TECHNO FITNESS</span>
+      </a>
+      {% endif %}
+      
+      <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+        {% if user.is_superuser %}
+        <a href="{% url "admin_dashboard" %}"  class="mr-5 nav-list">Back to Dashboard</a>
+        {% else %}
+        <a href="{% url "homepage" %}"  class="mr-5 nav-list">Home</a>
+        <a href="{% url "schedule" %}" class="mr-5 nav-list">Schedules</a>
+        <a href="{% url "pricing" %}" class="mr-5 nav-list">Pricing</a>
+
+        <a href="{% url 'about' %}" class="mr-5 nav-list">About</a>
+        <a href="{% url 'enquiry' %}" class="mr-5 nav-list">Contact</a>
+      </nav>
+      <a href="{% url "admin_login" %}" target="_blank" ><button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Admin
+      </button> </a>
+      {% endif %}
+      
+    </div>
+  </header>
+{% block content %}
+
+{% endblock content %}
+
+<!--Footer Section-->
+<div class="bg-gray-900">
+    <footer class="mx-auto max-w-screen-2xl px-4 md:px-8">
+      <div class="mb-16 grid grid-cols-2 gap-12 pt-10 md:grid-cols-4 lg:grid-cols-6 lg:gap-8 lg:pt-12">
+        <div class="col-span-full lg:col-span-2">
+          <!-- logo - start -->
+          <div class="mb-4 lg:-mt-2">
+            <a href="/" class="inline-flex items-center gap-2 text-xl font-bold text-gray-100 md:text-2xl" aria-label="logo">
+              
+                <img class="footer-logo" src="{% static 'images/logo.jpeg' %}" alt="footer-logo">
+              </svg>
+  
+              Techno Fitness
+            </a>
+          </div>
+          <!-- logo - end -->
+  
+          <p class="mb-2 text-gray-400 sm:pr-8">2nd Floor, Mansha Niketan, Dimna Chowk.</p>
+          <p class="mb-6 text-gray-400 sm:pr-8">7488796896</p>
+  
+  
+          <!-- social - start -->
+          <div class="flex gap-4">
+            <a href="#" target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+              <i class="fa-brands fa-youtube footer-icon"></i>
+          
+            </a>
+  
+            <a href="#" target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+              <i class="fa-brands fa-instagram footer-icon"></i>
+            </a>
+  
+            <a href="#" target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+              <i class="fa-brands fa-facebook footer-icon"></i>
+            </a>
+  
+            <a href="#" target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+              <i class="fa-brands fa-square-twitter footer-icon"></i>
+            </a>
+          </div>
+          <!-- social - end -->
+        </div>
+  
+  
+        <!-- nav - start -->
+        <div>
+          <div class="mb-4 font-bold uppercase tracking-widest text-gray-100">Quick Links</div>
+  
+          <nav class="flex flex-col gap-3">
+            <div>
+              <a href="#" class="text-gray-400 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Contact</a>
+            </div>
+  
+            <div>
+              <a href="#" class="text-gray-400 transition duration-100 hover:text-indigo-500 active:text-indigo-600">About</a>
+            </div>
+            <div>
+              <a href="#" class="text-gray-400 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Schedule</a>
+            </div>
+            <div>
+              <a href="#" class="text-gray-400 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Gallery</a>
+            </div>
+  
+            <div>
+              <a href="#" class="text-gray-400 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Give Reviews</a>
+            </div>
+  
+          </nav>
+        </div>
+  
+        <div>
+          <div class="mb-4 font-bold uppercase tracking-widest text-gray-100">Apps</div>
+  
+          <nav class="flex flex-col gap-3">
+            <div>
+              <a href="{% url "nutrition_track" %}" class="text-gray-400 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Nutrition Tracking</a>
+            </div>
+  
+            <div>
+              <a href="{% url "send_exercise" %}" class="text-gray-400 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Exercise Recommending</a>
+            </div>
+  
+          </nav>
+        </div>
+        
+        <div class="flex gap-3">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.047640416649!2d86.22681527530834!3d22.837726879303823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f5e23899700513%3A0x4019fa558a30de51!2sTechno%20Fit%20Multi%20Gym!5e0!3m2!1sen!2sin!4v1714756309211!5m2!1sen!2sin"
+           width="500" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+  
+        <!-- nav - end -->
+  
+     
+      </div>
+  
+      <div class="border-t border-gray-800 py-8 text-center text-sm text-gray-400">© 2024 - Techno Fitness. All rights reserved.</div>
+    </footer>
+  </div> 
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+  </html>
+   
+  </body>
+  </html>

@@ -1,0 +1,214 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+{% for message in messages  %}
+<div class="{{message.tags}} mb-2">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Message:</strong> {{message}}
+</div>
+{% endfor %}
+
+  <!--Hero Sections-->
+  <div class="bg-white pb-6 sm:pb-8 lg:pb-12">
+    <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+  
+      <section class="min-h-96 relative flex flex-1 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-gray-100 py-16 shadow-lg md:py-20 xl:py-48">
+        <!-- image - start -->
+
+        {% for img in hero_img  %}
+        <img src="/media/{{img.photo}}" loading="lazy" alt="hero-section image" class="absolute inset-0 h-full w-full object-cover object-center" />
+        {% endfor %}      
+        
+        <!-- image - end -->
+        
+  
+        <!-- overlay - start -->
+        <div class="absolute inset-0 bg-indigo-300 mix-blend-multiply"></div>
+        <!-- overlay - end -->
+  
+        <!-- text start -->
+        <div class="relative flex flex-col items-center p-4 sm:max-w-xl">
+          <!-- <p class="mb-4 text-center text-lg text-yellow-200 sm:text-xl md:mb-8">Very proud to introduce</p>
+          <h1 class="mb-8 text-center text-4xl font-bold text-white sm:text-5xl md:mb-12 md:text-6xl">Revolutionary way to build the web</h1> -->
+  
+          <div class="flex justify-center">
+           <a href="{% url "online_booking" %}"> <button class="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none rounded text-lg">Join with us</button> </a>
+            <!-- <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Workouts</button> -->
+          </div>
+        </div>
+        <!-- text end -->
+      </section>
+    </div>
+  </div>
+
+  <hr>
+ 
+
+  <!--Our Program-->
+  <div class="bg-white py-6 sm:py-8 lg:py-12">
+    <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+      <h2 class="mb-8 text-center text-2xl font-bold text-gray-800 md:mb-12 lg:text-3xl">Our Programs</h2>
+  
+      <div class="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+
+
+        <!-- product - start -->
+        {% for content in data  %}
+        <div>
+          <a href="#" class="group relative flex h-96 items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg">
+            <img src="/media/{{ content.photo }}" loading="lazy" alt="Photo by Austin Wade" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+  
+            <div class="relative flex w-full flex-col rounded-lg bg-white p-4 text-center">
+              <span class="text-gray-500">{{content.men_or_women}}</span>
+              <span class="text-lg font-bold text-gray-800 lg:text-xl">{{content.training_type}}</span>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        
+        <!-- product - end -->
+      </div>
+    </div>
+  </div>
+  <hr>
+
+<!--Our Apps-->
+  <div class="bg-white py-6 sm:py-8 lg:py-12">
+    <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+      <div class="mx-auto flex max-w-xl flex-col items-center text-center">
+        <p class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Explore Our Apps</p>
+  
+        <p class="text-gray-600 font-bold mb-3">You can track your Food nutritions and Get exercises details for every muscles just click on it and check.</p>
+  
+        <div class="flex w-full flex-col gap-2.5 sm:flex-row sm:justify-center">
+          <a href="{% url "nutrition_track" %}" target="_blank" class="inline-block rounded-lg bg-yellow-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-yellow-300 transition duration-100 hover:bg-yellow-600 focus-visible:ring active:bg-yellow-700 md:text-base">Track Nutritions</a>
+  
+          <a href="{% url "send_exercise" %}"  target="_blank" class="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base">Workout Plans</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+                                          
+
+  <!--Free Trail-->
+  <div class="bg-white py-6 sm:py-8 lg:py-12">
+    <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+      <div class="flex flex-col items-center justify-between gap-4 rounded-lg bg-gray-100 p-4 sm:flex-row md:p-8">
+        <div>
+          <h2 class="text-xl font-bold text-yellow-500 md:text-2xl">Start your free trial</h2>
+          <p class="text-gray-600">Book Plan Online and Get 10% Off</p>
+        </div>
+  
+        <a href="{% url "online_booking" %}" class="inline-block rounded-lg bg-yellow-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-yellow-300 transition duration-100 hover:bg-yellow-600 focus-visible:ring active:bg-yellow-700 md:text-base">Register now</a>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="gallery">
+    <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Our Gallery</h2>
+
+    <div  class="mb-5 h-auto max-w-full rounded-lg gallery-video" >
+      <iframe width="99%" height="350" src="https://www.youtube.com/embed/NKOc4cdqbLw?si=OBwN164NQoEhT3PV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-10">
+    
+       {% for img in gallery_img %}
+
+       <div>
+        <img class="h-auto max-w-full rounded-lg" src="/media/{{ img.photo }}" alt="">
+      </div>
+
+       {% endfor %}
+     
+    
+  </div>
+
+  </div>
+
+  
+
+
+
+<hr>
+<!--Statistics Section-->
+  <div class="bg-white py-6 sm:py-8 lg:py-12">
+    <div class="mx-auto max-w-screen-xl px-4 md:px-8">
+      <!-- text - start -->
+      <div class="mb-8 md:mb-12">
+        <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Our Statistics</h2>
+  
+        <!-- <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p> -->
+      </div>
+      <!-- text - end -->
+  
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-8">
+        <!-- stat - start -->
+        <div class="flex flex-col items-center justify-center rounded-lg bg-gray-100 p-4 md:p-8">
+          <div class="text-xl font-bold text-yellow-500 sm:text-2xl md:text-3xl peoples">{{member_cnt}}+</div>
+          <div class="text-sm font-semibold sm:text-base">Members</div>
+        </div>
+        <!-- stat - end -->
+  
+        <!-- stat - start -->
+        <div class="flex flex-col items-center justify-center rounded-lg bg-gray-100 p-4 md:p-8">
+          <div class="text-xl font-bold text-yellow-500 sm:text-2xl md:text-3xl peoples">{{total_feedback_counts}}+</div>
+          <div class="text-sm font-semibold sm:text-base">Positive Feedbacks</div>
+        </div>
+
+        <div class="flex flex-col items-center justify-center rounded-lg bg-gray-100 p-4 md:p-8">
+          <div class="text-xl font-bold text-yellow-500 sm:text-2xl md:text-3xl  peoples">20+</div>
+          <div class="text-sm font-semibold sm:text-base">Machine Equipments</div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <!--Review Section-->
+  <div class="bg-white py-6 sm:py-8 lg:py-12">
+    <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+      <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl xl:mb-12">Customer Feedbacks</h2>
+      <a href="{% url "feedback" %}" class="inline-block rounded-lg border bg-yellow px-4 py-2 text-center text-sm font-semibold text-yellow-600 outline-none ring-yellow-200 transition duration-100 hover:bg-yellow-100 focus-visible:ring active:bg-yellow-200  mb-2 md:px-8 md:py-3 md:text-base">Post review</a>
+     
+      <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
+
+
+        {% for review in feedbacks %}
+
+         <!-- review - start -->
+         <div class="flex flex-col gap-3 rounded-lg border p-4 md:p-6">
+          <div>
+            <span class="block text-sm font-bold md:text-base">{{review.name}}</span>
+            <span class="block text-sm text-gray-500">{{review.date}}</span>
+          </div>
+  
+          <!-- stars - start -->
+          <div class="-ml-1 flex gap-0.5">
+              <p>Stars {{review.stars}}/5</p>
+          </div>
+          <!-- stars - end -->
+  
+          <p class="text-gray-600">{{review.message}}</p>
+        </div>
+        
+        <!-- review - end -->
+
+        {% endfor %}
+      {% comment %} <a href="{% url "feedback" %}" class="inline-block rounded-lg border bg-yellow px-4 py-2 text-center text-sm font-semibold text-yellow-600 outline-none ring-yellow-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-yellow-200 md:px-8 md:py-3 md:text-base">See More</a> {% endcomment %}
+
+       
+        
+      </div>
+      <a href="{% url "all_feedback" %}" class="inline-block rounded-lg border bg-yellow px-4 py-2 text-center text-sm font-semibold text-yellow-600 outline-none ring-yellow-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-yellow-200 md:px-8 md:py-3 mt-2 md:text-base">See All</a>
+
+    </div>
+  </div>
+
+  {% endblock content %}

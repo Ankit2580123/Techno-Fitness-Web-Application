@@ -1,0 +1,121 @@
+{% extends 'base_dashboard.html' %} 
+{% load static %} 
+{% block content %}
+
+
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" style="margin-left:8px; color:#c7d413;" href="{% url "admin_dashboard" %}"><i class="fa-solid fa-circle-arrow-left"> Dashboard</i></a>
+  </nav>
+
+  {% comment %} {% for message in messages  %}
+  <div class="{{message.tags}}">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+    <strong>Message:</strong> {{message}}
+  </div>
+  {% endfor %} {% endcomment %}
+
+
+
+<div class="records table-responsive">
+
+
+                       
+
+    <div class="browse">
+        <form class="col-8 mx-1 p-1 mt-1 mb-1 "  enctype="multipart/form-data">
+           <input type="search" name="search"  placeholder="Search" class="record-search ">
+           <button class="search-btn mt-1">Search</button>
+            </form>
+        </div>
+    
+    
+
+
+<div>
+        
+    <span class="fa-solid fa-registered"></span>
+         <small>All Bookings</small>
+       
+    
+    <table width="100%">
+        
+        <thead>
+            <tr>
+                <th>Sno</th>
+                <th><span class="las la-sort"></span>NAME</th>
+                <th><span class="las la-sort"></span>AGE</small></th>
+                <th><span class="las la-sort"></span>PHONE NO</th>
+
+                <th><span class="las la-sort"></span>EMAIL</th>
+                <th><span class="las la-sort"></span>PLANS</th>
+                <th><span class="las la-sort"></span>BOOKINGS DATE</th>
+                <th><span class="las la-sort"></span>ACTIONS</th>
+
+
+
+              
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for data in bookings_data  %}
+
+
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.age}}</td>
+                
+                <td>{{data.phone_no}}</td>
+           
+                <td>{{data.email}} </td>
+                <td>{{data.plan}}</td>
+                <td>{{data.date}}</td>
+                <td>
+                       <a  class="btn" onclick="return confirm('Are you sure to delete this Enquiry ?')" href="{% url "delete_bookings" data.id %}">
+                        <div class="actions">
+                            <span class="fa-solid fa-trash"></span>
+                        </div>
+                    </a> 
+                </td>
+            </tr>
+
+
+            
+            
+            {% endfor %}
+
+           
+
+           
+            
+        </tbody>
+    </table>
+<!--Paginations-->
+ <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if bookings_data.has_previous %}
+                
+                <li class="page-item"><a class="page-link" href="?page={{bookings_data.previous_page_number }}"><i style="color:rgb(172, 172, 6); font-size:28px;" class="fa-solid fa-arrow-left"></i></a></li>
+                <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+              
+            {% endif %}
+    
+            <span class="current">
+                Page {{ bookings_data.number }} of {{bookings_data.paginator.num_pages }}.
+            </span>
+    
+            {% if data.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{bookings_data.next_page_number }}"><i style="color:rgb(172, 172, 6); font-size:28px;" class="fa-solid fa-arrow-right"></i></a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ bookings_data.paginator.num_pages }}">Last</a></li>
+            {% endif %}
+        </ul>
+    </nav>  
+
+    
+</div>
+
+</div>
+
+{% endblock content %}

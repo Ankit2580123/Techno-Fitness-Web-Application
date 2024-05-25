@@ -1,0 +1,233 @@
+{% extends 'base_dashboard.html' %} 
+{% load static %} 
+{% block content %}
+
+
+
+
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" style="margin-left:8px; color:#c7d413;" href="{% url "admin_dashboard" %}"><i class="fa-solid fa-circle-arrow-left"> Dashboard</i></a>
+    <a class="navbar-brand" style="margin-left:8px;" href="{% url "export_data" %}"><button type="button" class="btn btn-outline-warning" onclick="return confirm('Are you want to download the data into Excel Sheets.')" >Download into Excel</button> </a>
+  </nav>
+
+  
+
+  {% for message in messages  %}
+  <div class="{{message.tags}}">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+    <strong>Message:</strong> {{message}}
+  </div>
+  {% endfor %} 
+
+  <div class="browse">
+    <form class="col-6 mx-1 p-2 mt-1 mb-1 "  enctype="multipart/form-data">
+       <input type="search" style="width:240px;" name="search"  placeholder="seacrh names,age" class="record-search " required>
+       <button class="search-btn mt-1">Search</button>
+        </form>
+    </div>
+
+    <button type="button" class="btn btn-outline-warning mx-2 mt-1 mb-1 p-2 text-black" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add Members</button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Members</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Name:</label>
+                <input type="text" name='name'  class="form-control" id="recipient-name">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Father's Name</label>
+                <input type="text" name='fathers_name' class="form-control" id="recipient-name">
+                
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Phone Number</label>
+                <input type="number" name='phone_no' class="form-control" id="recipient-name">
+              </div>
+
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Age</label>
+                <input type="number" name='age' class="form-control" id="recipient-name">
+              </div>
+
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Address</label>
+                <textarea class="form-control" name='address' id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+
+
+              <label for="message-text" class="col-form-label">Plans</label>
+              <select class="form-select" name='plan' aria-label="Default select example">
+                <option selected>Monthly</option>
+                <option>Quaterly</option>
+                <option>Half Yearly</option>
+                <option >Yearly</option>
+                <option>1Day Free Trial</option>
+
+              </select>
+
+
+              <div class="mb-3">
+                <label for="message-text"  class="col-form-label">Date of Admission</label>
+                <input type="date" name='date' class="form-control" id="recipient-name">
+              </div>
+
+
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-warning">Add</button>
+              </div>
+              
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+
+    {% comment %} <a class="navbar-brand mx-2 " href="#"><button type="button" class="btn btn-outline-primary mt-2 mb-2">Add Members</button> </a> {% endcomment %}
+
+
+  {% comment %} {% for message in messages  %}
+  <div class="{{message.tags}}">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+    <strong>Message:</strong> {{message}}
+  </div>
+  {% endfor %} {% endcomment %}
+
+<div class="records table-responsive">
+
+   
+                       
+
+    {% comment %} <div class="browse">
+        <form class="col-6 mx-auto p-3 card shadow-lg" enctype="multipart/form-data">
+       <input type="search" placeholder="Search" class="record-search">
+       <button class="search-btn">Search</button>
+        </form>
+    </div> {% endcomment %}
+
+
+<div>
+        
+    <span class="las la-user-friends"></span>
+         <small>All Gym Members</small>
+       
+    
+    <table width="100%">
+        
+        <thead>
+         
+            <tr>
+                <th>Sno</th>
+                <th><span class="las la-sort"></span>NAME</th>
+                <th><span class="las la-sort"></span>FATHER NAME</small></th>
+                <th><span class="las la-sort"></span>PHONE NO</th>
+
+                <th><span class="las la-sort"></span>AGE</th>
+                <th><span class="las la-sort"></span>ADDRESS</th>
+                <th><span class="las la-sort"></span>PLANS</th>
+                {% comment %} <th><span class="las la-sort"></span>MODE OF PAYMENT</th> {% endcomment %}
+                <th><span class="las la-sort"></span>DATE OF ADMISSION</th>
+                <th><span class="las la-sort"></span>ACTIONS</th>
+
+
+              
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for data in members_data  %}
+
+
+            <tr>
+             
+                <td >{{forloop.counter}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.fathers_name}}</td>
+                
+                <td>{{data.phone_no}}</td>
+                <td>{{data.age}}</td>
+                <td>{{data.address}}</td>
+
+                <td>{{data.plan}}</td>
+                <td>{{data.date_of_admissions}}</td>
+
+
+                
+                    <td>
+
+                        <a  class="btn"
+                          href="{% url 'update_members' data.id %}">
+                        
+                            <div class="actions">
+                                <span class="fa-solid fa-pen-to-square"></span>
+                            </div>
+                        </a> 
+
+
+                    <a  class="btn" onclick="return confirm('Are you sure to delete this Record?')"  href="{% url "delete_members" data.id %} ">
+                     <div class="actions">
+                         <span class="fa-solid fa-trash"></span>
+                     </div>
+                 </a> 
+
+
+             </td>
+
+
+           
+              
+            </tr> 
+
+            {% endfor %}
+
+            
+
+
+
+           
+            
+        </tbody>
+    </table>
+<!--Paginations-->
+     <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if members_data.has_previous %}
+                
+                <li class="page-item"><a class="page-link" href="?page={{ members_data.previous_page_number }}"><i style="color:rgb(172, 172, 6); font-size:28px;" class="fa-solid fa-arrow-left"></i></a></li>
+                <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+              
+            {% endif %}
+    
+            <span class="current">
+                Page {{ members_data.number }} of {{ members_data.paginator.num_pages }}.
+            </span>
+    
+            {% if data.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{members_data.next_page_number }}"><i style="color:rgb(172, 172, 6); font-size:28px;" class="fa-solid fa-arrow-right"></i></a></li>
+                <li class="page-item"><a class="page-link" href="?page={{members_data.paginator.num_pages }}">Last</a></li>
+            {% endif %}
+        </ul>
+    </nav>  
+
+    
+</div>
+
+</div>
+
+
+
+ 
+
+{% endblock content %}

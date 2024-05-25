@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Admin Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="{% static "images/logo.jpeg" %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/box.css' %}">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+<body>
+   <input type="checkbox" id="menu-toggle">
+    <div class="sidebar">
+        <div class="side-content">
+            <div class="profile">
+                <div class="profile-img bg-img" style="background-image: url({% static "images/logo.jpeg" %})"></div>
+                <h4>Techno Fitness</h4>
+                <small>Owner</small>
+            </div>
+
+            <div class="side-menu">
+                <ul>
+                   
+                    <li>
+                       <a href="#" class="active">
+                            <span class="las la-home"></span>
+                            <small>Home</small>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url "total_gymmembers" %}">
+                             <span class="las la-user-alt"></span>
+                             <small>Members</small>
+                         </a>
+                     </li>
+                    <li>
+                       <a href="{% url "admin_dashboard" %}" class="active">
+                            <span class="las la-clipboard-list"></span>
+                            <small>Enquiries</small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url "all_bookings" %}">
+                        <span class="fa-solid fa-registered"></span>
+                         <small>Online Registration</small>
+                         </a>
+                     </li>
+
+                    <li>
+                       <a href="{% url "logout" %}">
+                        <span class="las la-power-off"></span>
+                        <small>Logout</small>
+                        </a>
+                    </li>
+
+                    
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        
+        <header>
+        
+            <div class="header-content">
+                
+                <label for="menu-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                
+                <div class="header-menu">
+                    
+                    <div class="user">
+                        <div class="bg-img" style="background-image: url(img/logo.jpeg)"></div>
+                        
+                        <a href="{% url "change_password" %}" class="password">
+                            <span class="fa-solid fa-gear"></span>
+                            <span>Reset Password</span>
+                            </a>
+
+
+                        {% comment %} <a href="{% url "logout" %}">
+                        <span class="las la-power-off"></span>
+                        <span>Logout</span>
+                        </a> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        
+        <main>
+            
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <small>Admin</small>
+            </div>
+            {% for message in messages  %}
+                <div class="{{message.tags}}">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                  <strong>Message:</strong> {{message}}
+                </div>
+                {% endfor %}
+            
+            <div class="page-content">
+            
+                <div class="analytics">
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h2>{{members_count}}</h2>
+                          <a href="{% url "total_gymmembers" %}">View <i class="fa-solid fa-eye"></i></a> 
+
+                          
+                            <span class="las la-user-friends"></span>
+                        </div>
+                        <div class="card-progress">
+                            <small>Our Total Gym Members</small>
+                            
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h2>{{reg_count}}</h2>
+                          <a href="{% url "all_bookings" %}">View <i class="fa-solid fa-eye"></i></a> 
+                            <span class="fa-solid fa-registered"></span>
+                            
+                        </div>
+                        <div class="card-progress">
+                            <small>Online Bookings</small>
+                           
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h2>{{feedback_count}}</h2>
+                          <a href="{% url "show_feedback" %}">View <i class="fa-solid fa-eye"></i></a> 
+
+                            <span class="fa-solid fa-comments"></span>
+                            
+                        </div>
+                        <div class="card-progress">
+                            <small>Total Feedbacks</small>
+                           
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="card">
+                        <div class="card-head">
+                            <h2>{{enq_count}}</h2>
+                          <a href="#"></a> 
+                          {% comment %} <i class="fa-solid fa-eye"></i> {% endcomment %}
+
+                            <span class="las la-clipboard-list"></span>
+                        </div>
+                        <div class="card-progress">
+                            <small>Total Enquires</small>
+                            {% comment %} <div class="card-indicator">
+                                <div class="indicator three" style="width: 0%"></div>
+                            </div> {% endcomment %}
+                        </div>
+                    </div> 
+
+
+                </div>
+
+
+                <div class="records table-responsive">
+
+                       
+
+                     <div class="browse">
+                            <form class="col-6 mx-auto p-3 card shadow-lg" enctype="multipart/form-data">
+                           <input type="search" name='search' placeholder="Search with names" class="record-search">
+                           <button class="search-btn">Search</button>
+                            </form>
+                        </div>
+                  
+
+                    <div>
+                            
+                            <span class="las la-clipboard-list"></span>
+                             <small>Enquires Data</small>
+                           
+                        
+                        <table width="100%">
+                            
+                            <thead>
+                                <tr>
+                                    <th>Sno</th>
+                                    <th><span class="las la-sort"></span>NAME</th>
+                                    <th><span class="las la-sort"></span>CONTACT NUMBER</th>
+                                    <th><span class="las la-sort"></span>ENQUIRY DATE</th>
+                                    <th><span class="las la-sort"></span>SUBJECT</th>
+                                    <th><span class="las la-sort"></span>ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in enquiry_obj %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>
+                                        <div class="client">
+                                           <!-- <div class="client-img bg-img" style="background-image: url(img/3.jpeg)"></div> -->
+                                            <div class="client-info">
+                                                <h4>{{data.name}}</h4>
+                                                
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{data.phone_no}}</td>
+
+                                    <td>{{data.date}} </td>
+                                    <td>{{data.message}} </td>
+                                    <td>
+                                        
+                                        <a  class="btn" onclick="return confirm('Are you sure to delete this Enquiry ?')" href="{% url 'delete_enquiry' data.id %}">
+                                            <div class="actions">
+                                                <span class="fa-solid fa-trash"></span>
+                                            </div>
+                                        </a>
+                                       
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                               
+                                
+                            </tbody>
+                        </table>
+<!--Paginations-->
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                {% if enquiry_obj.has_previous %}
+                                    
+                                    <li class="page-item"><a class="page-link" href="?page={{ enquiry_obj.previous_page_number }}"><i style="color:rgb(172, 172, 6); font-size:28px;" class="fa-solid fa-arrow-left"></i></a></li>
+                                    <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+                                  
+                                {% endif %}
+                        
+                                <span class="current">
+                                    Page {{ enquiry_obj.number }} of {{ enquiry_obj.paginator.num_pages }}.
+                                </span>
+                        
+                                {% if enquiry_obj.has_next %}
+                                    <li class="page-item"><a class="page-link" href="?page={{enquiry_obj.next_page_number }}"><i style="color:rgb(172, 172, 6); font-size:28px;" class="fa-solid fa-arrow-right"></i></a></li>
+                                    <li class="page-item"><a class="page-link" href="?page={{ enquiry_obj.paginator.num_pages }}">Last</a></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+
+                        
+                    </div>
+
+                </div>
+            
+            </div>
+            
+        </main>
+        
+    </div>
+</body>
+</html>

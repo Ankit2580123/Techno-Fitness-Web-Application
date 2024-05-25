@@ -1,0 +1,74 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+ 
+    <section class="about">
+        <h1>About Us</h1>
+        <div class="about-info">
+           
+          <div class="about-img">
+            <img src="{% static "images/bodybuilding.jpg" %}" alt="techno-fitness">
+        </div> 
+
+            <div>
+            <p> Welcome to TECHNO FITNESS, where we believe fitness is a journey, not a destination. Our mission is to empower individuals of all fitness levels to achieve their goals, unlock their potential, and live healthier, happier lives.
+            </p>
+      
+            </div>
+        </div>
+    </section>
+    <hr>
+
+    <section class="about">
+      <h1>Our Story</h1>
+      <div class="about-info">
+          {% comment %} <div class="about-img">
+              <img src="#" alt="techno-fitness">
+          </div> {% endcomment %}
+          <div>
+          <p> Founded in [Year], Techno Fitness has been a cornerstone of the local fitness community for [X] years. Our founder, SANJEEV MAHATO, envisioned a space where people could come together, break barriers, and transform their lives through fitness.
+
+            What started as a modest gym has grown into a thriving community dedicated to wellness and personal growth.
+          </p>
+            
+          </div>
+      </div>
+  </section>
+  <hr>
+
+  <section class="about" >
+    <h1>Our Facilities</h1>
+    <div class="about-info">
+        {% comment %} <div class="about-img">
+            <img src="#" alt="techno-fitness">
+        </div> {% endcomment %}
+        <div>
+        <p>Our state-of-the-art facilities are designed to inspire and motivate. From cutting-edge equipment to dynamic group fitness classes, we offer everything you need to challenge yourself and elevate your workouts. Whether you're a beginner or a seasoned athlete, you'll find the tools and resources to succeed at Techno Fitness.
+        </p>
+          
+        </div>
+    </div>
+</section>
+<hr>
+ 
+    <section class="team">
+        <h1>Meet Our Team</h1>
+        <div class="team-cards">
+           
+            <!-- Cards here -->
+           
+            <div class="card">
+                <div class="card-img">
+                    <img src="#" alt="Trainer">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-name">Sanjeev Mahato</h2>
+                    <p class="card-role">Founder</p>
+                    <p class="card-email">Joe@example.com</p>
+                    <p><button class="buttons">Contact</button></p>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    {% endblock content %}

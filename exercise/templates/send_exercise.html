@@ -1,0 +1,73 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+
+
+{% for message in messages  %}
+<div class="{{message.tags}}">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Message:</strong> {{message}}
+</div>
+{% endfor %}
+
+
+<div class=" mt-8 mx-auto">
+    <h1 class="text-4xl text-gray-800 sm:text-4xl font-bold mb-4">Get Exercise</h1>
+    <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg" >Get Exercise Plans According to your muscles choices.</p>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="p-2 w-full">
+            <div class="relative">
+                <label for="name" class="leading-7 py-4 text-lg text-gray-900">Name</label>
+                <input type="text" id="name" name="name" 
+                    class=" w-full bg-white rounded border border-gray-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-900 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out " required>
+            </div>
+        </div>
+        <div class="p-2 w-full">
+            <div class="relative">
+                <label for="email" class="leading-7 py-4 text-lg text-gray-900">Email</label>
+                <input type="email" id="email" name="email" required
+                    class=" w-full bg-white rounded border border-gray-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-900 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out">
+            </div>
+        </div>
+
+        <div class="p-2 w-full">
+            <div class="relative">
+              <label for="cars" class="leading-7 py-4 text-lg text-gray-900">What you want to train today!</label>
+              <select class="w-full bg-white rounded border border-gray-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-900 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out" name="exercise_choice">
+                
+                <option>Chest</option>
+                <option>Abdominals</option>
+                <option>Biceps</option>
+                <option>Calves</option>
+                <option>Forearms</option>
+                <option>Glutes</option>
+                <option>Hamstrings</option>
+                <option>Quadriceps</option>
+                <option>Shoulders</option>
+                <option>Traps</option>
+                <option>Triceps</option>
+
+                
+                
+
+              </select>
+            </div>
+        </div>
+
+       
+        <div class="p-2 w-full">
+            <div>
+              <button type="submit" class="inline-block rounded-lg bg-yellow-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-yellow-300 transition duration-100 hover:bg-yellow-600 focus-visible:ring active:bg-yellow-700 md:text-base">Submit</button> 
+            </div>
+    </form>
+</div>
+
+
+
+{% endblock content %}
+
+{% include "footer.html" %}
+
+

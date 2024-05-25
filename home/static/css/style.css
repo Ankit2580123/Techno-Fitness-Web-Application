@@ -1,0 +1,82 @@
+
+ /* .hero-img{
+  height: 600px;
+  width: 100%;
+ } */
+ #logo{
+  height: 50px;
+  width: 55px;
+  border-radius: 50%;
+ }
+ .nav{
+    background-color:#333333;
+ }
+ .nav-heading{
+    font-weight: 500;
+    color:yellow;
+ }
+
+ .nav-list{
+    color:yellow;
+    font-size: 1.1rem;
+    font-weight: 500;
+ }
+.nav-list:hover{
+    cursor: pointer;
+    color:#FFFF;
+    
+}
+
+.peoples{
+   color:#929b0d;
+}
+
+
+/*Gallery*/
+
+.gallery-seemore{
+   display: flex;
+   align-items: center;
+}
+.gallery-video{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+/*Footer*/
+
+.footer-logo{
+   height: 60px;
+   width: 65px;
+   border-radius: 50%;
+}
+
+
+
+ .footer-icon{
+   width: 24px;
+   height: 24px;
+ }
+ 
+
+ /*Alert Box*/
+ .alert {
+   padding: 20px;
+   background-color: #f44336;
+   color: white;
+ }
+ 
+ .closebtn {
+   margin-left: 15px;
+   color: white;
+   font-weight: bold;
+   float: right;
+   font-size: 29px;
+   line-height: 20px;
+   cursor: pointer;
+   transition: 0.3s;
+ }
+ 
+ .closebtn:hover {
+   color: black;
+ }

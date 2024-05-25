@@ -1,0 +1,28 @@
+ /*Alert Box*/
+ .error {
+    padding: 14px;
+    background-color: #ba3e38;
+    color: white;
+    font-size: 18px;
+  }
+  
+  .success {
+    padding: 14px;
+    background-color: #4eba7f;
+    color: white;
+    font-size: 18px;
+  }
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 29px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }
