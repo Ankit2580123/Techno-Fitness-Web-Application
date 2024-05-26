@@ -52,6 +52,13 @@
                          </a>
                      </li>
 
+                     <li>
+                        <a href="{% url "equipments" %}">
+                            <span class="fa-solid fa-dumbbell"></span>
+                         <small>Total Equipment</small>
+                         </a>
+                     </li>
+
                     <li>
                        <a href="{% url "logout" %}">
                         <span class="las la-power-off"></span>
@@ -156,7 +163,19 @@
                         </div>
                     </div>
 
-
+                    <div class="card">
+                        <div class="card-head">
+                            <h2>{{equip_cnt}}</h2>
+                          <a href="{% url "equipments" %}">View <i class="fa-solid fa-eye"></i></a> 
+                            <span class="fa-solid fa-dumbbell"></span>
+                       
+                            
+                        </div>
+                        <div class="card-progress">
+                            <small>Total Equipments</small>
+                           
+                        </div>
+                    </div>
                     
                     <div class="card">
                         <div class="card-head">

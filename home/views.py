@@ -22,11 +22,12 @@ def homepage(request):
     feedback=Reviews.objects.all().count()
     hero_banner=HeroBanner.objects.all()[:1]
     members=TotalMember.objects.all().count()
+    equip=Equipments.objects.all().count()
 
     return render(request,'index.html',{'data':program, 'gallery_img':gallery_img,
                            'feedbacks':reviews,  'hero_img':hero_banner,
                            'total_feedback_counts':feedback,
-                           'member_cnt':members,
+                           'member_cnt':members,'equip_cnt':equip,
 
                  } )
 
@@ -99,6 +100,7 @@ def admin_dashboard(request):
     enquiry_obj=Enquiry.objects.all()
     feedback=Reviews.objects.all().count()
     total_members=TotalMember.objects.all().count()
+    equip=Equipments.objects.all().count()
     search=request.GET.get('search')
     if request.GET.get('search'):
         enquiry_obj=enquiry_obj.filter(
@@ -123,6 +125,8 @@ def admin_dashboard(request):
             'feedback_count':feedback,
             "enquiry_obj": page_obj,
             'members_count':total_members,
+            'equip_cnt':equip,
+
     })
 
 
@@ -356,3 +360,36 @@ def export_data_to_excel(request):
     messages.success(request,"Excel File Download Successfully")
     return redirect('total_gymmembers')
   
+def equipments(request):
+
+    obj=Equipments.objects.all()
+    if request.method=="POST":  
+        equipment_name=request.POST['name']
+        price=request.POST['price']
+        units=request.POST['units']
+        desc=request.POST['description']
+        purchase_date=request.POST['purchase_date']
+
+       
+        Equipments.objects.create(
+            name=equipment_name,
+            price=price,
+            unit=units,
+            description=desc,
+            purchase_date=purchase_date,   
+        )
+        messages.success(request,"Equipments Added Successfully")
+        return redirect('equipments')
+    
+    paginator = Paginator(obj, 8)  # Show 25 contacts per page.
+
+    page_number = request.GET.get("page",1)
+    page_obj = paginator.get_page(page_number)
+        
+    return render(request,'equipment.html',{'equipment_data':page_obj})
+
+def delete_equipments(request,id):
+    obj=Equipments.objects.filter(id=id)
+    obj.delete()
+    messages.success(request,"Equipments Deleted")
+    return redirect('equipments')

@@ -1,0 +1,159 @@
+{% extends 'base_dashboard.html' %} 
+{% load static %} 
+{% block content %}
+
+
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" style="margin-left:8px; color:#c7d413;" href="{% url "admin_dashboard" %}"><i class="fa-solid fa-circle-arrow-left"> Dashboard</i></a>
+  </nav>
+
+ {% for message in messages  %}
+  <div class="{{message.tags}}">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+    <strong>Message:</strong> {{message}}
+  </div>
+  {% endfor %} 
+
+  <button type="button" class="btn btn-outline-warning mx-2 mt-2 mb-1 p-2 text-black" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add Equipments</button>
+
+
+<div class="records table-responsive">
+
+<div>
+        
+    <i class="fa-solid fa-dumbbell"></i>
+         <small>Equipments Details</small>
+       
+    
+    <table width="100%">
+        
+        <thead>
+            <tr>
+                <th>Sno</th>
+                <th><span class="las la-sort"></span>NAME</th>
+                <th><span class="las la-sort"></span>PRICE</small></th>
+
+                <th><span class="las la-sort"></span>UNITS</th>
+                <th><span class="las la-sort"></span>PURCHASE DATE</th>
+                <th><span class="las la-sort"></span>DESCRIPTION</th>
+                <th><span class="las la-sort"></span>ACTIONS</th>
+
+
+
+              
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for data in equipment_data  %}
+
+
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.price}}</td>
+                
+                <td>{{data.unit}}</td>
+           
+                <td>{{data.purchase_date}} </td>
+                <td>{{data.description}}</td>
+                <td>
+                       <a  class="btn" onclick="return confirm('Are you sure to delete this Equipment ?')" href="{% url "delete_equip" data.id %}">
+                        <div class="actions">
+                            <span class="fa-solid fa-trash"></span>
+                        </div>
+                    </a> 
+                </td>
+            </tr>
+
+
+            
+            
+            {% endfor %}
+
+           
+
+           
+            
+        </tbody>
+    </table>
+<!--Paginations-->
+ <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if equipment_data.has_previous %}
+                
+                <li class="page-item"><a class="page-link" href="?page={{equipment_data.previous_page_number }}"><i style="color:rgb(172, 172, 6); font-size:28px;" class="fa-solid fa-arrow-left"></i></a></li>
+                <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+              
+            {% endif %}
+    
+            <span class="current">
+                Page {{equipment_data.number }} of {{equipment_data.paginator.num_pages }}.
+            </span>
+    
+            {% if data.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{equipment_data.next_page_number }}"><i style="color:rgb(172, 172, 6); font-size:28px;" class="fa-solid fa-arrow-right"></i></a></li>
+                <li class="page-item"><a class="page-link" href="?page={{equipment_data.paginator.num_pages }}">Last</a></li>
+            {% endif %}
+        </ul>
+    </nav>  
+
+    
+</div>
+
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Equipments</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Equipment Name</label>
+            <input type="text" name='name'  class="form-control" id="recipient-name" required>
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Price</label>
+            <input type="text" name='price' class="form-control" id="recipient-name" required>
+            
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Units</label>
+            <input type="text" name='units' class="form-control" id="recipient-name" required>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Description</label>
+            <input type="text" name='description' class="form-control" id="recipient-name" required>
+          </div>
+
+
+
+          <div class="mb-3">
+            <label for="message-text"  class="col-form-label">Purchase Date</label>
+            <input type="date" name='purchase_date' class="form-control" id="recipient-name" required>
+          </div>
+
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-warning">Add</button>
+          </div>
+          
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

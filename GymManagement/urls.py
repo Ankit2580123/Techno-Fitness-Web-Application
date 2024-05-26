@@ -51,6 +51,8 @@ urlpatterns = [
 
     path('export_data',export_data_to_excel,name='export_data'),
 
+    path('equipment_page',equipments,name='equipments'),
+    path('delete_equip<int:id>',delete_equipments,name='delete_equip'),
 
 
 
